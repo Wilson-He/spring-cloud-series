@@ -26,7 +26,6 @@ public class TokenGlobalFilter implements GlobalFilter, Ordered {
         Map<String, String> headers = exchange.getRequest().getHeaders().toSingleValueMap();
         boolean hasToken = headers.containsKey("token") && StringUtils.isNotBlank(headers.get("token"));
         if (!hasToken) {
-            System.err.println("token无效");
             exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
             return exchange.getResponse().setComplete();
         }
