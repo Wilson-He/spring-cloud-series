@@ -28,11 +28,17 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-openfeign</artifactId>
         </dependency>
-<!--        <dependency>
+        <dependency>
             <groupId>io.github.wilson</groupId>
             <artifactId>common</artifactId>
             <version>1.0-SNAPSHOT</version>
-        </dependency>-->
+            <scope>compile</scope>
+        </dependency>
+        <!--        <dependency>
+                    <groupId>io.github.wilson</groupId>
+                    <artifactId>common</artifactId>
+                    <version>1.0-SNAPSHOT</version>
+                </dependency>-->
     </dependencies>
 
 

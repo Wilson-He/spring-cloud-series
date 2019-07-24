@@ -1,5 +1,4 @@
-server:
-  port: 8100
+
 spring:
   application:
     name: user-service
@@ -7,3 +6,14 @@ eureka:
   client:
     service-url:
       defaultZone: http://localhost:8000/eureka/
+
+---
+spring:
+  profiles: user1
+server:
+  port: 8101
+---
+spring:
+  profiles: user2
+server:
+  port: 8102

@@ -16,6 +16,7 @@
     <url>http://www.example.com</url>
     <modules>
         <module>user-api</module>
+        <module>order-api</module>
     </modules>
 
     <properties>

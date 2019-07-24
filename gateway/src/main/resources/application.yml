@@ -1,31 +1,63 @@
 server:
   port: 8999
-
 spring:
   application:
-    name: gateway-app
+    name: gateway-server
+  profiles:
+    active: gateway-eureka
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8000/eureka/
+#logging:
+#  level:
+#    org.springframework.cloud.gateway: debug
+
+---
+spring:
+  profiles: gateway-eureka
   cloud:
     gateway:
       discovery:
         locator:
+          # 启用DiscoveryClient网关集成,可通过网关地址与serviceName访问注册中心的service
           enabled: true
-          # 默认会将请求路径上的服务名配置为大写
+          # 服务名转小写
           lower-case-service-id: true
-      routes:
-        - id: header_route
-          uri: lb://user-consumer
           predicates:
-            - Header=Authorization, \w+
-          #            - Path=/user-consumer/**
+            - name: Path
+              args:
+                patterns: "'/'+serviceId+'/**'"
+            - name: Header
+              args:
+                header: "'token'"
+                regexp: "'\\w+'"
           filters:
-            - RequestParam=true
-#            - AddResponseHeader=filterHeader, headVal
+            - name: RewritePath
+              args:
+                replacement: "'/${remaining}'"
+                regexp: "'/' + serviceId + '/(?<remaining>.*)'"
+            - name: AddResponseHeader
+              args:
+                name: "'response-test-head'"
+                value: "'response-test'"
+            - name: RequestRecord
+              args:
+                print: true
+          global-token-filter-enabled: true
 
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: http://localhost:8000/eureka/
-
-logging:
-  level:
-    org.springframework.cloud.gateway: debug
+---
+spring:
+  profiles: singleton
+  cloud:
+    gateway:
+      routes:
+        - uri: lb://user-consumer
+          predicates:
+            - Header=token, \w+
+            - Path=/user-consumer/**
+          filters:
+            # 删除第一个路径/user-consumer
+            #            - StripPrefix=1
+            - AddResponseHeader=response-header, head-val

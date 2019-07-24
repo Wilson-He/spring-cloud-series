@@ -9,8 +9,8 @@ import javax.annotation.PostConstruct;
  * @author Wilson
  * @date 2019/7/4
  **/
-//@Configuration
-//@ComponentScan
+@Configuration
+@ComponentScan
 public class FeignComponentConfig {
 
     @PostConstruct

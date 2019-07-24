@@ -1,24 +1,20 @@
-package io.github.cloud;
+package io.github.consumer.order;
 
-import com.google.common.collect.ImmutableBiMap;
-import com.google.common.collect.ImmutableMap;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.Map;
 
 /**
  * @author Wilson
- * @date 2019/6/20
+ * @date 2019/6/24
  **/
 @SpringBootApplication
 @EnableDiscoveryClient
-@RestController
-public class UserProviderApplication {
-
+@RequestMapping("/")
+public class OrderConsumerApplication {
     public static void main(String[] args) {
-        SpringApplication.run(UserProviderApplication.class, args);
+        SpringApplication.run(OrderConsumerApplication.class, args);
     }
 }

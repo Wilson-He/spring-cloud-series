@@ -2,6 +2,7 @@ package io.github.gateway.filter;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.core.Ordered;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
+import javax.annotation.PostConstruct;
 import java.util.Map;
 
 /**
@@ -20,7 +22,13 @@ import java.util.Map;
  **/
 @Slf4j
 @Component
-public class TokenGlobalFilter implements GlobalFilter, Ordered {
+@ConditionalOnProperty(value = "spring.cloud.gateway.discovery.locator.global-token-filter-enabled", havingValue = "true")
+public class GlobalTokenFilter implements GlobalFilter, Ordered {
+    @PostConstruct
+    public void init() {
+        log.info("GlobalTokenFilter init finish");
+    }
+
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         Map<String, String> headers = exchange.getRequest().getHeaders().toSingleValueMap();
@@ -29,6 +37,7 @@ public class TokenGlobalFilter implements GlobalFilter, Ordered {
             exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
             return exchange.getResponse().setComplete();
         }
+        log.info("token value:" + headers.get("token"));
         return chain.filter(exchange);
     }
 

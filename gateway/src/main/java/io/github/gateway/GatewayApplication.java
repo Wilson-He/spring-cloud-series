@@ -1,17 +1,22 @@
 package io.github.gateway;
 
-import io.github.gateway.filter.RequestParamGatewayFilterFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.gateway.route.RouteLocator;
+import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;
+import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.context.annotation.Bean;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author Wilson
  * @date 2019/6/21
  **/
 @SpringBootApplication
-@EnableDiscoveryClient
+@EnableEurekaClient
+@RestController
 public class GatewayApplication {
     public static void main(String[] args) {
         SpringApplication.run(GatewayApplication.class, args);
@@ -36,4 +41,17 @@ public class GatewayApplication {
         return new RequestParamGatewayFilterFactory();
     }*/
 
+/*    @Bean
+    public RouteLocator pathRouteLocator(RouteLocatorBuilder builder) {
+        return builder.routes()
+                .route(p -> p
+                        .path("/user-consumer/**")
+                        .and()
+                        .header("token", "\\w+")
+                        .filters(f -> f
+                                .addResponseHeader("response-header", "head-val")
+                                .stripPrefix(1))
+                        .uri("lb://user-consumer"))
+                .build();
+    }*/
 }
