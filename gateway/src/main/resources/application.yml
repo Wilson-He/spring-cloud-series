@@ -6,10 +6,7 @@ spring:
   profiles:
     active: gateway-eureka
 
-eureka:
-  client:
-    service-url:
-      defaultZone: http://localhost:8000/eureka/
+
 #logging:
 #  level:
 #    org.springframework.cloud.gateway: debug

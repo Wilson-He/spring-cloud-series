@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/")
 public class OrderController {
     @GetMapping("/order")
-    public String order(){
+    public String order() {
         return "order";
     }
 }

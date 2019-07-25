@@ -13,11 +13,6 @@ import javax.annotation.PostConstruct;
 @Component
 public class UserServiceFallback implements UserService {
 
-    @PostConstruct
-    public void init(){
-        System.out.println("UserServiceFallback init");
-    }
-
     @Override
     public UserBase get(Integer id) {
         return new UserBase().setName("get fallback");

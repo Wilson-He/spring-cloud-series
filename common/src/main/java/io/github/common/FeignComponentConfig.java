@@ -13,8 +13,4 @@ import javax.annotation.PostConstruct;
 @ComponentScan
 public class FeignComponentConfig {
 
-    @PostConstruct
-    public void init() {
-        System.out.println("FeignComponentConfig init");
-    }
 }

@@ -12,16 +12,12 @@ eureka:
 spring:
   application:
     name: eurka-server
-#  boot:
-#    admin:
-#      client:
-#        url: http://localhost:8998
-#
-#management:
-#  endpoints:
-#    web:
-#      exposure:
-#        include: '*'
-#  endpoint:
-#    health:
-#      show-details: ALWAYS
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: ALWAYS

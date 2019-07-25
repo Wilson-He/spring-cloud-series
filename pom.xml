@@ -9,8 +9,6 @@
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
     <modules>
-        <module>apollo-config-service</module>
-        <module>apollo-admin-service</module>
         <module>cloud-eureka</module>
         <module>consumer</module>
         <module>provider</module>
@@ -20,12 +18,9 @@
         <module>ribbon</module>
         <module>bus</module>
         <module>config-server</module>
-        <module>service-hi</module>
     </modules>
 
     <name>spring-cloud-series</name>
-    <!-- FIXME change it to the project's website -->
-    <url>http://www.example.com</url>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -37,10 +32,9 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <!--        <spring-cloud.version>Finchley.RELEASE</spring-cloud.version>-->
         <spring-cloud.version>Greenwich.SR1</spring-cloud.version>
+        <spring-boot-admin.version>2.1.6</spring-boot-admin.version>
     </properties>
-
 
     <dependencies>
         <dependency>
@@ -51,6 +45,14 @@
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>de.codecentric</groupId>
+                <artifactId>spring-boot-admin-dependencies</artifactId>
+                <version>${spring-boot-admin.version}</version>
+                <scope>import</scope>
+                <type>pom</type>
+                <optional>true</optional>
+            </dependency>
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
